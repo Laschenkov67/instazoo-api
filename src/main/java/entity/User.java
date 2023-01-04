@@ -1,6 +1,7 @@
 package entity;
 
 import entity.enums.ERole;
+import jakarta.persistence.PrePersist;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class User {
     private LocalDateTime createDate;
 
     /** Отслеживаем когда создан пользователь **/
+    @PrePersist
     protected void onCreateUser() {
         this.createDate = LocalDateTime.now();
     }
