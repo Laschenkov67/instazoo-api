@@ -4,12 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import entity.enums.ERole;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
@@ -40,6 +38,12 @@ public class User {
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     @Column(updatable = false)
     private LocalDateTime createDate;
+
+    @Transient
+    private Collection<? extends GrantedAuthority> authorities;
+
+    public User() {
+    }
 
     /** Отслеживаем когда создан пользователь **/
     @PrePersist
